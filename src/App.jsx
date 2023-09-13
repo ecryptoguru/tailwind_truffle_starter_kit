@@ -1,9 +1,15 @@
+import Header from "./components/Header"
+import Hero from "./components/Hero"
+
 const App = () => {
-  return (
-    <div className="min-h-screen">
-      <h4 className="text-3xl">Hello Truffle and Tailwind</h4>
-    </div>
-  )
+ return (
+   <div className="min-h-screen">
+     <div className="gradient-bg-hero">
+       <Header />
+       <Hero />
+     </div>
+   </div>
+ )
 }
 
 export default App
