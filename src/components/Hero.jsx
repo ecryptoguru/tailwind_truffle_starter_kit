@@ -1,6 +1,10 @@
 import Identicon from 'react-identicons'
+import { setGlobalState } from '../store'
 
 const Hero = () => {
+    const onCreatedNFT = () => {
+        setGlobalState('modal', 'scale-100')
+      }
 
  return (
    <div
@@ -23,6 +27,7 @@ const Hero = () => {
            className="shadow-xl shadow-black text-white
            bg-[#e32970] hover:bg-[#bd255f]
            rounded-full cursor-pointer p-2"
+           onClick={onCreatedNFT}
          >
            Create NFT
          </button>
