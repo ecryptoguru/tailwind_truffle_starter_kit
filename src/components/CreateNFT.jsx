@@ -1,6 +1,24 @@
-import { useGlobalState, setGlobalState } from '../store'
+import { useGlobalState, setGlobalState setLoadingMsg, setAlert, } from '../store'
 import { useState } from 'react'
 import { FaTimes } from 'react-icons/fa'
+import { create } from 'ipfs-http-client'
+import { mintNFT } from '../Blockchain.Services'
+
+const auth =
+ 'Basic ' +
+ Buffer.from(
+   process.env.REACT_APP_INFURIA_PID + ':' + process.env.REACT_APP_INFURIA_API,
+ ).toString('base64')
+
+const client = create({
+ host: 'ipfs.infura.io',
+ port: 5001,
+ protocol: 'https',
+ headers: {
+   authorization: auth,
+ },
+})
+
 
 const CreateNFT = () => {
  const [modal] = useGlobalState('modal')
@@ -16,7 +34,35 @@ const CreateNFT = () => {
    if (!title || !price || !description) return
 
    setGlobalState('modal', 'scale-0')
+   setGlobalState('loading', { show: true, msg: 'Uploading IPFS data...' })
+
+   try {
+     const created = await client.add(fileUrl)
+     const metadataURI = `https://ipfs.io/ipfs/${created.path}`
+     const nft = { title, price, description, metadataURI }
+
+     setLoadingMsg('Intializing transaction...')
+     setFileUrl(metadataURI)
+     await mintNFT(nft)
+
+     resetForm()
+     setAlert('Minting completed...', 'green')
+   } catch (error) {
+     console.log('Error uploading file: ', error)
+     setAlert('Minting failed...', 'red')
+   }
  }
+
+ const changeImage = async (e) => {
+  const reader = new FileReader()
+  if (e.target.files[0]) reader.readAsDataURL(e.target.files[0])
+
+  reader.onload = (readerEvent) => {
+    const file = readerEvent.target.result
+    setImgBase64(file)
+    setFileUrl(e.target.files[0])
+  }
+}
 
  const closeModal = () => {
    setGlobalState('modal', 'scale-0')
@@ -76,6 +122,7 @@ const CreateNFT = () => {
                      file:bg-[#19212c] file:text-gray-400
                      hover:file:bg-[#1d2631]
                      cursor-pointer focus:ring-0 focus:outline-none"
+                     onChange={changeImage}
                    required
                  />
                </label>
