@@ -1,16 +1,31 @@
-import { useGlobalState, setGlobalState } from '../store'
+import { useGlobalState, setGlobalState, setLoadingMsg, setAlert, } from '../store'
+import { updateNFT } from '../Blockchain.Services'
 import { useState } from 'react'
 import { FaTimes } from 'react-icons/fa'
 
 const UpdateNFT = () => {
  const [modal] = useGlobalState('updateModal')
- const [price, setPrice] = useState('')
+ const [nft] = useGlobalState('nft')
+ const [price, setPrice] = useState(nft?.cost)
 
  const handleSubmit = async (e) => {
    e.preventDefault()
    if (!price || price <= 0) return
 
    setGlobalState('modal', 'scale-0')
+   setLoadingMsg('Initiating price update...')
+
+   try {
+     setLoadingMsg('Price updating...')
+     setGlobalState('updateModal', 'scale-0')
+
+     await updateNFT({id: nft.id, cost: price })
+     setAlert('Price updated...', 'green')
+     window.location.reload()
+   } catch (error) {
+     console.log('Error updating file: ', error)
+     setAlert('Update failed...', 'red')
+   }
  }
 
  return (
@@ -22,7 +37,7 @@ const UpdateNFT = () => {
      <div className="bg-[#151c25] shadow-xl shadow-[#e32970] rounded-xl w-11/12 md:w-2/5 h-7/12 p-6">
        <form className="flex flex-col">
          <div className="flex flex-row justify-between items-center">
-           <p className="font-semibold text-gray-400">Title</p>
+           <p className="font-semibold text-gray-400">{nft?.title}</p>
            <button
              type="button"
              onClick={() => setGlobalState('updateModal', 'scale-0')}
@@ -35,9 +50,9 @@ const UpdateNFT = () => {
          <div className="flex flex-row justify-center items-center rounded-xl mt-5">
            <div className="shrink-0 rounded-xl overflow-hidden h-20 w-20">
              <img
-               alt="NFT"
+               alt={nft?.title}
+               src={nft?.metadataURI}
                className="h-full w-full object-cover cursor-pointer"
-               src="https://images.cointelegraph.com/images/1434_aHR0cHM6Ly9zMy5jb2ludGVsZWdyYXBoLmNvbS91cGxvYWRzLzIwMjEtMDYvNGE4NmNmOWQtODM2Mi00YmVhLThiMzctZDEyODAxNjUxZTE1LmpwZWc=.jpg"
              />
            </div>
          </div>

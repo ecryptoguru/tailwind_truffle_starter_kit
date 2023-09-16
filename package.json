@@ -1,7 +1,7 @@
 {
-  "name": "starter_kit",
+  "name": "fusionainft",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.8.0",
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
@@ -23,7 +23,7 @@
   "devDependencies": {
     "@openzeppelin/contracts": "^4.5.0",
     "@tailwindcss/forms": "0.4.0",
-    "@truffle/hdwallet-provider": "^2.0.4",
+    "@truffle/hdwallet-provider": "^2.1.15",
     "assert": "^2.0.0",
     "autoprefixer": "10.4.2",
     "babel-polyfill": "^6.26.0",

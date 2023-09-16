@@ -12,7 +12,7 @@ const Header = () => {
        <img
          className="w-32 cursor-pointer"
          src={Logo}
-         alt="Timeless Logo"
+         alt="FusionAI Logo"
        />
      </div>
 
