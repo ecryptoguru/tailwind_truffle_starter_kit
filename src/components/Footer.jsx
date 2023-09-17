@@ -1,4 +1,5 @@
 import Logo from '../assets/logo.png'
+import ethlogo from '../assets/ethlogo.png'
 
 const Footer = () => (
  <div className="w-full flex md:justify-center justify-between items-center flex-col p-4 gradient-bg-footer">
@@ -23,12 +24,19 @@ const Footer = () => (
      </div>
 
      <div className="flex flex-[0.25] justify-center items-center">
-     <p className="text-white text-right text-xs">
-         &copy;2022 All rights reserved
+     <p className="text-white text-right text-mx-2">
+     Made with Love ❤️ 
        </p>
      </div>
    </div>
+   <div className="flex flex-row justify-center items-center mt-2">
+        <img src={ethlogo} alt="logo" className="w-8" />
+        <span className="text-white text-xs">
+        &copy;2023 FusionAI NFT Marketplace. All rights reserved.
+        </span>
+      </div>
  </div>
+ 
 )
 
 export default Footer
