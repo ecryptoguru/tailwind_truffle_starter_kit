@@ -2,7 +2,6 @@ import Web3 from 'web3'
 import { setGlobalState, getGlobalState, setAlert } from './store'
 import abi from './abis/FusionAINFT.json'
 
-
 const { ethereum } = window
 window.web3 = new Web3(ethereum)
 window.web3 = new Web3(window.web3.currentProvider)

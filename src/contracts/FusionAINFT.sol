@@ -7,7 +7,6 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract FusionAINFT is ERC721Enumerable, Ownable {
     using Strings for uint256;
-
     mapping(string => uint8) existingURIs;
     mapping(uint256 => address) public holderOf;
 
@@ -56,7 +55,6 @@ contract FusionAINFT is ERC721Enumerable, Ownable {
     ) external payable {
         require(msg.value >= cost, "Ether too low for minting!");
         require(existingURIs[metadataURI] == 0, "This NFT is already minted!");
-        require(msg.sender != owner(), "Sales not allowed!");
         
 
         uint256 royality = (msg.value * royalityFee) / 100;

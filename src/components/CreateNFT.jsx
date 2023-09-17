@@ -5,7 +5,7 @@ import { create } from 'ipfs-http-client'
 import { mintNFT } from '../Blockchain.Services'
 
 const auth = 'Basic ' + Buffer.from(
-  '2VTntZYskX2xDBiwP7V4Ot4p5Ie' + ':' + '3c592975738c0b1556b2577861158dea',
+  process.env.REACT_APP_INFURIA_PID + ':' + process.env.REACT_APP_INFURIA_API,
  ).toString('base64')
 
 const client = create({

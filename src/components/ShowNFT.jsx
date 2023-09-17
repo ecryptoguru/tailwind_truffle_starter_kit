@@ -94,7 +94,7 @@ const ShowNFT = () => {
            hover:bg-transparent hover:text-[#e32970]
            hover:border hover:border-[#bd255f]
            focus:outline-none focus:ring mt-5"
-           onClick={handlePurchase}
+           onClick={onChangePrice}
          >
            Change Price
          </button>
@@ -107,7 +107,7 @@ const ShowNFT = () => {
              hover:bg-transparent hover:text-[#e32970]
              hover:border hover:border-[#bd255f]
              focus:outline-none focus:ring mt-5"
-             onClick={onChangePrice}
+             onClick={handlePurchase}
          >
           Purchase
          </button>

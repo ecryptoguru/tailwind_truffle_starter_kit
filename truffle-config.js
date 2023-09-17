@@ -7,7 +7,7 @@ module.exports = {
  
   networks: {
     goerli: {
-      provider: () => new HDWalletProvider('de8a26e6b72d88624b6654fbab69d5ffd89e5abe562c0fddde2c728565a9f4ba', 'https://eth-goerli.g.alchemy.com/v2/zFLsJNluWQy1M5B5uTv_EKE_NH0APmcz'),
+      provider: () => new HDWalletProvider(process.env.SECRET_KEY, process.env.ENDPOINT_URL),
       network_id: 5,
       gas: 5000000, //gas limit
       confirmations: 2,    // # of confs to wait between deployments. (default: 0)
