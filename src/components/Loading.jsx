@@ -1,8 +1,7 @@
 import { useGlobalState } from '../store'
 
 const Loading = () => {
-
-    const [loading] = useGlobalState('loading')
+  const [loading] = useGlobalState('loading')
 
     return (
       <div
