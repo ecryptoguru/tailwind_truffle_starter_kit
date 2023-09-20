@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { isWallectConnected, getAllNFTs } from './Blockchain.Services'
+import { isWalletConnected, getAllNFTs } from './Blockchain.Services'
 import Alert from "./components/Alert"
 import Header from "./components/Header"
 import Hero from "./components/Hero"
@@ -14,7 +14,7 @@ import Footer from "./components/Footer"
 
 const App = () => {
   useEffect(async () => {
-    await isWallectConnected()
+    await isWalletConnected()
     await getAllNFTs()
   }, [])
  
